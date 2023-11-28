@@ -41,9 +41,61 @@ app.post('/submitForm', (req, res) => {
             `${formData.buyer.fullName} <${formData.buyer.emailAddress}>` : 
             `${formData.seller.fullName} <${formData.seller.emailAddress}>`, // Use the email submitted in the form
         subject: 'MLH Confirmation',
+        // for text only capable emails 
         text: `Hi ${formData.clientWantsTo === 'buy' ? formData.buyer.fullName : formData.seller.fullName}!
-        Thank you for contacting me through my client request form on mallorylaynehomes.com. You stated that you are looking to ${formData.clientWantsTo === 'buy' ? `buy a ${interestedInBuying(formData)}.` : `sell your ${sellingTheir(formData)}.`}`
-        // You can add HTML content or attachments if needed
+        Thank you for contacting me through my client request form on mallorylaynehomes.com.
+        You stated that you are looking to ${formData.clientWantsTo === 'buy' ? `buy a ${interestedInBuying(formData)}.` : `sell your ${sellingTheir(formData)}.`}
+        ${formData.clientWantsTo === 'buy' ? `Willing to spend: ${formData.buyer.isWillingToSpend}
+        Bedrooms: ${formData.buyer.bedrooms}
+        Bathrooms: ${formData.buyer.bathrooms}
+        Desired areas: ${formData.buyer.desiredAreaToLive}
+        ${formData.buyer.timeframe === 'Yes' ? `Timeframe: ${formData.buyer.timeframeInfo}` : 'Timeframe: No'}
+        ${formData.buyer.extraInformation && `Extra info: ${formData.buyer.extraInformation}`}
+        I will contact you via this email address over the next few days. Looking forward to it 😀,
+        Sincerely,
+            Mallory Layne Weitz`
+        : `Home address: ${formData.seller.addressOfHome}
+        Inferred value: ${formData.seller.believesHomeValueIs}
+        Bedrooms: ${formData.seller.bedrooms}
+        Bathrooms: ${formData.seller.bathrooms}
+        Square footage: ${formData.seller.sqft}
+        Lot size: ${formData.seller.lot}
+        ${formData.seller.timeframe === 'Yes' ? `Timeframe: ${formData.seller.timeframeInfo}` : 'Timeframe: No'}
+        ${formData.seller.extraInformation && `Extra info: ${formData.seller.extraInformation}`}
+        I will contact you via this email address over the next few days. Looking forward to it 😀,
+        Sincerely,
+            Mallory Layne Weitz`}`,
+        // for most emails
+        html: `
+        <img src="cid:headshot" alt="Description" style="float: right; width: 150px; height: auto; border-radius: 25%;"/>
+        <h4>Hi ${formData.clientWantsTo === 'buy' ? formData.buyer.fullName : formData.seller.fullName}!</h4>
+        <p>Thank you for contacting me through my client request form on mallorylaynehomes.com. <br/>
+        You stated that you are looking to ${formData.clientWantsTo === 'buy' ? `buy a ${interestedInBuying(formData)}.` : `sell your ${sellingTheir(formData)}.`} <br/>
+        ${formData.clientWantsTo === 'buy' ? `Willing to spend: ${formData.buyer.isWillingToSpend} <br/>
+        Bedrooms: ${formData.buyer.bedrooms} <br/>
+        Bathrooms: ${formData.buyer.bathrooms} <br/>
+        Desired areas: ${formData.buyer.desiredAreaToLive} <br/>
+        ${formData.buyer.timeframe === 'Yes' ? `Timeframe: ${formData.buyer.timeframeInfo}` : 'Timeframe: No'} <br/>
+        ${formData.buyer.extraInformation && `Extra info: ${formData.buyer.extraInformation}`} <br/>
+        I will contact you via this email address over the next few days. Looking forward to it 😀, <br/>
+        Sincerely, </p>
+        <p style="margin-left: 20px;">Mallory Layne Weitz - <span style="font-weight: bold;">Real Estate Broker</span></p>`
+        : `Home address: ${formData.seller.addressOfHome}
+        Inferred value: ${formData.seller.believesHomeValueIs}
+        Bedrooms: ${formData.seller.bedrooms}
+        Bathrooms: ${formData.seller.bathrooms}
+        Square footage: ${formData.seller.sqft}
+        Lot size: ${formData.seller.lot}
+        ${formData.seller.timeframe === 'Yes' ? `Timeframe: ${formData.seller.timeframeInfo}` : 'Timeframe: No'}
+        ${formData.seller.extraInformation && `Extra info: ${formData.seller.extraInformation}`}
+        I will contact you via this email address over the next few days. Looking forward to it 😀,
+        Sincerely,
+            Mallory Layne Weitz`}</p>`,
+        attachments: [{
+            filename: 'realitorimg.jpeg',
+            path: './realitorimg.jpeg',
+            cid: 'headshot'
+        }]
     };
 
     // Send the email
