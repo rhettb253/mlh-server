@@ -80,17 +80,17 @@ app.post('/submitForm', (req, res) => {
         I will contact you via this email address over the next few days. Looking forward to it 😀, <br/>
         Sincerely, </p>
         <p style="margin-left: 20px;">Mallory Layne Weitz - <span style="font-weight: bold;">Real Estate Broker</span></p>`
-        : `Home address: ${formData.seller.addressOfHome}
-        Inferred value: ${formData.seller.believesHomeValueIs}
-        Bedrooms: ${formData.seller.bedrooms}
-        Bathrooms: ${formData.seller.bathrooms}
-        Square footage: ${formData.seller.sqft}
-        Lot size: ${formData.seller.lot}
-        ${formData.seller.timeframe === 'Yes' ? `Timeframe: ${formData.seller.timeframeInfo}` : 'Timeframe: No'}
-        ${formData.seller.extraInformation && `Extra info: ${formData.seller.extraInformation}`}
-        I will contact you via this email address over the next few days. Looking forward to it 😀,
-        Sincerely,
-            Mallory Layne Weitz`}</p>`,
+        : `Home address: ${formData.seller.addressOfHome} <br/>
+        Inferred value: ${formData.seller.believesHomeValueIs} <br/>
+        Bedrooms: ${formData.seller.bedrooms} <br/>
+        Bathrooms: ${formData.seller.bathrooms} <br/>
+        Square footage: ${formData.seller.sqft} <br/>
+        Lot size: ${formData.seller.lot} <br/>
+        ${formData.seller.timeframe === 'Yes' ? `Timeframe: ${formData.seller.timeframeInfo}` : 'Timeframe: No'} <br/>
+        ${formData.seller.extraInformation && `Extra info: ${formData.seller.extraInformation}`} <br/>
+        I will contact you via this email address over the next few days. Looking forward to it 😀, <br/>
+        Sincerely,</p>
+        <p style="margin-left: 20px;">Mallory Layne Weitz - <span style="font-weight: bold;">Real Estate Broker</span>`}</p>`,
         attachments: [{
             filename: 'realitorimg.jpeg',
             path: './realitorimg.jpeg',
