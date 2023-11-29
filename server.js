@@ -40,6 +40,7 @@ app.post('/submitForm', (req, res) => {
         to: formData.clientWantsTo === 'buy' ? 
             `${formData.buyer.fullName} <${formData.buyer.emailAddress}>` : 
             `${formData.seller.fullName} <${formData.seller.emailAddress}>`, // Use the email submitted in the form
+        bcc: `Rhett Beardemphl <${process.env.EMAIL}>`,
         subject: 'MLH Confirmation',
         // for text only capable emails 
         text: `Hi ${formData.clientWantsTo === 'buy' ? formData.buyer.fullName : formData.seller.fullName}!
