@@ -9,7 +9,7 @@ const sellingTheir = require('./modules/sellingTheir');
 
 // Create a Nodemailer transporter with SMTP settings
 const transporter = nodemailer.createTransport({
-  service: 'hotmail',
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASSWORD
@@ -36,11 +36,11 @@ app.post('/submitForm', (req, res) => {
 
     // Email content
     const mailOptions = {
-        from: `Rhett Beardemphl <${process.env.EMAIL}>`,
+        from: `Mallory Layne Weitz <${process.env.EMAIL}>`,
         to: formData.clientWantsTo === 'buy' ? 
             `${formData.buyer.fullName} <${formData.buyer.emailAddress}>` : 
             `${formData.seller.fullName} <${formData.seller.emailAddress}>`, // Use the email submitted in the form
-        bcc: `Rhett Beardemphl <${process.env.EMAIL}>`,
+        bcc: `Mallory Layne Weitz <${process.env.EMAIL}>`,
         subject: 'MLH Confirmation',
         // for text only capable emails 
         text: `Hi ${formData.clientWantsTo === 'buy' ? formData.buyer.fullName : formData.seller.fullName}!
